@@ -2,6 +2,28 @@
            (replacing the palceholder with your Github name):
            https://api.github.com/users/<your name>
 */
+axios.get("");
+
+axios
+  .get("https://api.github.com/users/nataliastewart")
+  .then(response => {
+    // deal with the response data in here
+    console.log(response);
+  })
+  .catch(err => {
+    // deal with the error in here
+  });
+/*
+axios.get('https://dog.ceo/api/breed/mastiff/images/random/12')
+.then(response => {
+console.log(response);
+response.data.message.forEach( imgSrc => {
+  entryPoint.append(DogCard(imgSrc))
+})
+})
+.catch(error => {
+console.log("the data was not returned", error)
+})*/
 
 /* Step 2: Inspect and study the data coming back, this is YOUR 
    github info! You will need to understand the structure of this 
