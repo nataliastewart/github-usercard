@@ -2,17 +2,7 @@
            (replacing the palceholder with your Github name):
            https://api.github.com/users/<your name>
 */
-axios.get("");
 
-axios
-  .get("https://api.github.com/users/nataliastewart")
-  .then(response => {
-    // deal with the response data in here
-    console.log(response);
-  })
-  .catch(err => {
-    // deal with the error in here
-  });
 /*
 axios.get('https://dog.ceo/api/breed/mastiff/images/random/12')
 .then(response => {
@@ -75,3 +65,70 @@ const followersArray = [];
   luishrd
   bigknell
 */
+
+function profileCard(object) {
+  //creating elements
+  const card = document.createElement("div"),
+    imgUser = document.createElement("img"),
+    cardInfo = document.createElement("div"),
+    userName = document.createElement("h3"),
+    pUser = document.createElement("p"),
+    pLocation = document.createElement("p"),
+    pProfile = document.createElement("p"),
+    aGithub = document.createElement("a"),
+    pFollowers = document.createElement("p"),
+    pFollowing = document.createElement("p"),
+    pBio = document.createElement("p");
+
+  //add class-------------------------------
+  card.classList.add("card");
+  cardInfo.classList.add("card-info");
+  userName.classList.add("name");
+  pUser.classList.add("username");
+
+  //
+  imgUser.src = object.data.avatar_url;
+  pLocation.textContent = `Location: ${object.data.location}`;
+  pProfile.textContent = "Profile: ";
+  aGithub.href = object.data.html_url;
+  // console.log(object.html_url);
+
+  pFollowers.textContent = `Followers: ${object.data.followers}`;
+  pFollowing.textContent = `Following: ${object.data.following}`;
+  pBio.textContent = `Bio: ${object.data.bio}`;
+  aGithub.textContent = object.data.html_url;
+  userName.textContent = object.data.name;
+  pUser.textContent = object.data.login;
+
+  //appending
+
+  card.append(imgUser, cardInfo);
+  cardInfo.append(
+    userName,
+    pUser,
+    pLocation,
+    pProfile,
+    pFollowers,
+    pFollowing,
+    pBio
+  );
+  pProfile.append(aGithub);
+
+  return card;
+}
+
+const parentCard = document.querySelector(".cards");
+
+axios
+  .get("https://api.github.com/users/nataliastewart")
+  .then(response => {
+    // deal with the response data in here
+
+    parentCard.append(profileCard(response));
+
+    console.log(response);
+  })
+  .catch(err => {
+    // deal with the error in here
+    console.log("the data was not returned", err);
+  });
