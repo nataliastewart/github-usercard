@@ -36,7 +36,13 @@ console.log("the data was not returned", error)
           user, and adding that card to the DOM.
 */
 
-const followersArray = [];
+const followersArray = [
+  "joowoonk",
+  "mtruj013",
+  "imriven",
+  "mrsimpson3000",
+  "devjaymoe"
+];
 
 /* Step 3: Create a function that accepts a single object as its only argument,
           Using DOM methods and properties, create a component that will return the following DOM element:
@@ -132,3 +138,26 @@ axios
     // deal with the error in here
     console.log("the data was not returned", err);
   });
+
+// axios
+//   .get("https://api.github.com/users/nataliastewart/followers")
+//   .then(response => {
+//     response.data
+followersArray
+  .forEach(function(item) {
+    axios
+      .get(`https://api.github.com/users/${item}`)
+      .then(response => {
+        parentCard.append(profileCard(response));
+
+        console.log(response);
+      })
+      .catch(err => {
+        console.log("the data was not returned", err);
+      });
+  })
+
+  .catch(err => {
+    console.log("the data was not returned", err);
+  });
+// });
